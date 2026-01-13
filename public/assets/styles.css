@@ -1,0 +1,443 @@
+/* =========================================
+   1. VARIABLES Y CONFIGURACIÓN BASE
+   ========================================= */
+:root {
+    /* Paleta de Colores */
+    --bg-start: #e0e0e0;       /* Gris claro inicio */
+    --bg-end: #ffffff;         /* Blanco fin */
+    --primary: #2d3e50;        /* Azul oscuro (Textos/Títulos) */
+    --accent: #007bff;         /* Azul brillante (Botones/Links) */
+    --accent-hover: #0056b3;
+    --success: #28a745;        /* Verde */
+    --success-hover: #218838;
+    --danger: #dc3545;         /* Rojo */
+    --danger-hover: #c82333;
+    --warning: #ffc107;        /* Amarillo */
+    --card-bg: #e0e0e0;        /* Fondo de tarjetas */
+    
+    /* Espaciado y Bordes */
+    --radius-sm: 5px;
+    --radius-md: 10px;
+    --radius-lg: 20px;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Reset Básico */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    /* Cambio solicitado: Fondo gris degradado */
+    background: linear-gradient(to bottom, var(--bg-start), var(--bg-end));
+    color: #333;
+    min-height: 100vh;
+}
+
+a, a:visited {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+/* =========================================
+   2. LAYOUT Y CONTENEDORES
+   ========================================= */
+/* Unificación de .container: Se usa el valor más amplio (1000px) para consistencia,
+   pero con width 95% para que no se rompa en pantallas medianas */
+.container {
+    max-width: 1000px;
+    width: 95%;
+    margin: 40px auto;
+    padding: 30px;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-hover);
+    text-align: center;
+    box-sizing: border-box;
+}
+
+/* Secciones internas */
+.incident-section {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.incident-details, .equipment-details {
+    flex: 1;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    background-color: #f9f9f9;
+}
+
+/* =========================================
+   3. TIPOGRAFÍA
+   ========================================= */
+.title {
+    font-size: 24px;
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: var(--primary);
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+/* =========================================
+   4. FORMULARIOS (Inputs, Selects, Textareas)
+   ========================================= */
+form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.form-group {
+    flex: 1 1 calc(50% - 10px);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: var(--primary);
+    display: block;
+}
+
+/* Estilos Generales para todos los campos de entrada */
+input, select, textarea, 
+#estado, #Currency, #ItemCode, 
+#activo_id, #empleado_id, #usuario_id, #area_id {
+    width: 100%;
+    padding: 10px;
+    border-radius: var(--radius-sm); /* Unificado a 5px o 20px según prefieras, puse 5px por inputs standard */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: white;
+    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+/* Selects personalizados */
+select, #estado, #Currency {
+    appearance: none;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2210%22%20height%3D%225%22%20viewBox%3D%220%200%2010%205%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M0%200l5%205%205-5z%22%20fill%3D%22%23333%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 10px;
+}
+
+input:focus, select:focus, textarea:focus {
+    border-color: var(--primary);
+    outline: none;
+    box-shadow: 0 0 5px rgba(45, 62, 80, 0.3);
+}
+
+textarea {
+    resize: none;
+    height: 160px !important; /* Mantenido el valor más alto encontrado */
+}
+
+/* --- OVERRIDES ESPECÍFICOS (IDs con anchos fijos del original) --- */
+#empleado { width: 466px !important; }
+#datos-activo { width: 978px !important; }
+#correo, #fecha_ingreso, #nombre, #username { width: 970px; }
+#administrador { height: 38px; width: 485px; }
+#activo_id, #descripcion { width: revert !important; }
+#descripcion { height: 170px !important; }
+#buscador { height: 20px !important; }
+
+/* Igualar campos dentro del form de registro */
+#register-form input,
+#register-form select,
+#register-form textarea {
+    width: 100%;
+    height: 44px;
+}
+
+/* =========================================
+   5. BOTONES
+   ========================================= */
+/* Estilo Base */
+button, .btn, .btn-export, .btn-update, .confirm, .close, .btn-gray {
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--radius-lg); /* Algunos tenían 5px, otros 20px. Estandaricé a 20px para modernidad */
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+    color: white;
+    display: inline-block;
+    text-align: center;
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+/* Variantes de Color */
+.btn, .search-bar button, .btn-update {
+    background-color: var(--accent); /* Azul */
+}
+.btn:hover, .search-bar button:hover, .btn-update:hover {
+    background-color: var(--accent-hover);
+}
+
+.btn-export, .confirm, .btn-iniciar {
+    background-color: var(--success) !important; /* Verde */
+}
+.btn-export:hover, .confirm:hover, .btn-iniciar:hover {
+    background-color: var(--success-hover) !important;
+}
+
+.close, .btn-finalizar {
+    background-color: var(--danger); /* Rojo */
+}
+.close:hover, .btn-finalizar:hover {
+    background-color: var(--danger-hover);
+}
+
+.btn-gray {
+    background-color: #6c757d;
+    border-radius: var(--radius-sm);
+}
+.btn-gray:hover {
+    background-color: #5a6268;
+}
+
+/* Botones Pequeños (Estados) */
+.btn-iniciar, .btn-finalizar {
+    width: 75px;
+    height: 30px;
+    font-size: 12px;
+    padding: 5px;
+    border-radius: var(--radius-sm);
+    margin-right: 5px;
+}
+
+/* Grupos de botones */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.button-group button {
+    width: 100%;
+    max-width: 500px; /* Limite razonable en desktop */
+}
+
+/* Botón Regresar */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    color: #333;
+    font-size: 16px;
+    margin-bottom: 20px;
+    background: none;
+    padding: 0;
+}
+.back-button img {
+    width: 20px;
+    margin-right: 8px;
+}
+
+/* =========================================
+   6. COMPONENTE: OPCIONES (Tarjetas)
+   ========================================= */
+.options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.option {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    width: 200px; /* Valor más reciente del original */
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.option img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.option p {
+    font-size: 14px;
+    color: var(--primary);
+    margin: 0;
+}
+
+.option:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-hover);
+}
+
+/* =========================================
+   7. COMPONENTE: BARRA DE BÚSQUEDA
+   ========================================= */
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.search-bar input {
+    width: 300px;
+    margin-bottom: 0; /* Override del margen general de inputs */
+}
+
+.search-bar button {
+    margin-bottom: 0;
+}
+
+/* =========================================
+   8. TABLAS
+   ========================================= */
+.table-container {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: white;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+}
+
+.data-table th, .data-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 14px !important;
+}
+
+.data-table th {
+    background-color: var(--accent); /* Cabecera Azul */
+    color: white;
+    font-weight: bold;
+}
+
+.data-table td {
+    background-color: #f9f9f9;
+}
+
+.data-table input {
+    width: 90%;
+    padding: 4px;
+    text-transform: uppercase;
+    margin-bottom: 0;
+}
+
+/* Etiquetas de estado en tabla */
+.estado-equipo {
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    color: transparent; /* Oculta texto según original */
+    font-size: 0;
+}
+.estado-equipo.verde { background-color: var(--success); }
+.estado-equipo.amarillo { background-color: var(--warning); }
+
+/* =========================================
+   9. RESPONSIVE (MÓVIL)
+   ========================================= */
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 95%;
+        margin: 10px auto;
+        padding: 15px;
+    }
+
+    .title {
+        font-size: 20px;
+    }
+
+    /* Opciones en columna */
+    .options {
+        flex-direction: column;
+        align-items: center;
+    }
+    .option {
+        width: 100%;
+        height: auto;
+        flex-direction: row; /* Icono al lado del texto en móvil */
+        justify-content: flex-start;
+        gap: 20px;
+    }
+    .option img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 0;
+    }
+
+    /* Formularios en columna */
+    .form-group {
+        flex: 1 1 100%;
+    }
+    .incident-section {
+        flex-direction: column;
+    }
+    
+    /* Búsqueda */
+    .search-bar {
+        flex-direction: column;
+        width: 100%;
+    }
+    .search-bar input, .search-bar button {
+        width: 100%;
+    }
+
+    /* Tabla con scroll */
+    .data-table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    /* Botones full width */
+    button.btn, .button-group button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    
+    /* Overrides de IDs fijos para móvil (Importante para que no rompa la pantalla) */
+    #empleado, #datos-activo, #correo, #fecha_ingreso, #nombre, #username, #administrador {
+        width: 100% !important;
+    }
+}
