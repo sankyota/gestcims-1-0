@@ -215,19 +215,17 @@ if (areaFilter) {
 });
 
 
-            const row = document.createElement("tr");
-            row.innerHTML = `
-                <td>${item.ItemCode || "N/A"}</td>
-                <td>${item.ItemName || "N/A"}</td>
-                <td>${marca}</td>
-                <td>${modelo}</td>
-                <td>${fechaCompra}</td>
-                <td>${item.Price ? `$${item.Price.toFixed(2)}` : "No disponible"}</td>
-                <td>${item.Currency || "USD"}</td>
-                <td>${item.id}</td>
-                <td>${item.area || "Sin área"}</td>
-
-            `;
+              const row = document.createElement("tr");
+row.innerHTML = `
+    <td>${item.ItemCode || "N/A"}</td>
+    <td>${item.ItemName || "N/A"}</td>
+    <td>${marca}</td>
+    <td>${modelo}</td>
+    <td>${fechaCompra}</td>
+    <td>${item.Price ? `$${item.Price.toFixed(2)}` : "No disponible"}</td>
+    <td>${item.Currency || "USD"}</td>
+    <td>${item.area || "Sin área"}</td>
+`;
 
             const estadoCell = document.createElement("td");
             estadoCell.appendChild(estadoSelect);
@@ -334,7 +332,7 @@ if (areaFiltro) {
     });
 
     const fechaReporte = new Date().toLocaleString();
-    const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf.umd;
     const doc = new jsPDF();
 
     doc.setFontSize(16);
